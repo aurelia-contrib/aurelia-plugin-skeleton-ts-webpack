@@ -53,7 +53,7 @@
     "no-empty": true,
     "no-floating-promises": true,
     "no-for-in-array": true,
-    "no-implicit-dependencies": true,
+    "no-implicit-dependencies": false, // fkleuver: we can't make internal dependencies explicit as far as I know
     "no-import-side-effect": true,
     "no-increment-decrement": false, // fkleuver: this is a well-known, well-documented shorthand which is present in (and works consistently across) multiple strongly-typed languages (C#, Java..), and in many cases improves readability of code, so let's not disallow this
     "no-invalid-regexp": true,

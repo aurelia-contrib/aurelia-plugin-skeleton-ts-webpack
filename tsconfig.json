@@ -1,3 +1,10 @@
 {
-  "extends": "./configs/tsconfig-projectroot.json"
+  "extends": "./configs/tsconfig-projectroot.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*"],
+      "src/*": ["src/*"]
+    }
+  }
 }

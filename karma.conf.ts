@@ -31,7 +31,10 @@ export default (config: IKarmaConfig): void => {
       mode: "development",
       resolve: {
         extensions: [".ts", ".js"],
-        modules: ["src", "node_modules"]
+        modules: ["src", "node_modules"],
+        alias: {
+          src: path.resolve(__dirname, "src")
+        }
       },
       devtool: "cheap-module-eval-source-map",
       module: {
