@@ -69,7 +69,7 @@
     "no-sparse-arrays": true,
     "no-string-literal": true,
     "no-string-throw": true,
-    "no-submodule-imports": true,
+    "no-submodule-imports": false, // fkleuver: this will also warn on importing internal non-relative modules and that's not worth the hassle
     "no-unnecessary-bind": true,
     "no-unnecessary-callback-wrapper": true,
     "no-unnecessary-initializer": true,
@@ -77,7 +77,7 @@
     "no-unsafe-any": false, // fkleuver: checking "any" arguments for null or undefined should be up to the author, as in many cases this leads to redundant checks
     "no-unsafe-finally": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
+    "no-use-before-declare": false, // fkleuver: only useful when using the "var" keyword which we really never use anymore in TypeScript, and slow to compute, so let's turn it off
     "no-with-statement": true,
     "promise-function-async": true,
     "promise-must-complete": true,
@@ -146,7 +146,7 @@
     "no-suspicious-comment": true,
     "no-this-assignment": true,
     "no-typeof-undefined": true,
-    "no-unnecessary-class": true,
+    "no-unnecessary-class": false, // fkleuver: tslint is kind of bad at deciding when a class is "unnecessary"
     "no-unnecessary-field-initialization": true,
     "no-unnecessary-local-variable": true,
     "no-unnecessary-qualifier": true,
@@ -171,9 +171,9 @@
     "typedef": [
       true,
       "call-signature",
-      "arrow-call-signature",
+      //"arrow-call-signature", // fkleuver: this can lead to incredibly verbose code that could otherwise be very succinct; leave this up to the developer where it makes sense
       "parameter",
-      "arrow-parameter",
+      //"arrow-parameter", // fkleuver: this can lead to incredibly verbose code that could otherwise be very succinct; leave this up to the developer where it makes sense
       "property-declaration",
       //"variable-declaration", // fkleuver: just like with "var" in C#, a variable without a typedef must be directly initialized (the no-implicit-any rule will ensure this); requiring a typedef in those cases leads to redundancy in type keywords and, ultimately, less readable code
       "member-variable-declaration"
@@ -220,7 +220,7 @@
     "no-single-line-block-comment": true,
     "no-trailing-whitespace": true,
     "no-unnecessary-semicolons": true,
-    "object-literal-key-quotes": [true, "as-needed"],
+    "object-literal-key-quotes": [true, "consistent"], // fkleuver: either all or none, makes for more readable (and pleasant to look at) code
     "one-line": [true, "check-open-brace", "check-catch", "check-else", "check-whitespace"],
     "quotemark": [true, "double"],
     "semicolon": [true, "always"],
