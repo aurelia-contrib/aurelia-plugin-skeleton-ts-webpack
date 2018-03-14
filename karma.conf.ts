@@ -12,7 +12,7 @@ export interface IKarmaConfig extends karma.Config, IKarmaConfigOptions {
 
 export interface IKarmaConfigOptions extends karma.ConfigOptions {
   webpack: webpack.Configuration;
-  coverageIstanbulReporter: any;
+  coverageIstanbulReporter?: any;
   webpackServer: any;
   customLaunchers: any;
 }

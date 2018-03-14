@@ -18,7 +18,7 @@ interface IEnv {
 }
 
 const devBaseUrl: string = "/";
-const prodBaseUrl: string = "/aurelia-router-metadata/";
+const prodBaseUrl: string = "/aurelia-plugin-skeleton-ts-webpack/";
 const config = (env: IEnv = {}): IConfiguration => {
   return {
     mode: "development",
@@ -27,7 +27,7 @@ const config = (env: IEnv = {}): IConfiguration => {
       modules: ["src", "demo", "node_modules"],
       alias: {
         bluebird: path.resolve(__dirname, "node_modules/bluebird/js/browser/bluebird.core"),
-        "aurelia-router-metadata": path.resolve(__dirname, "src/aurelia-router-metadata.ts")
+        "aurelia-plugin-skeleton-ts-webpack": path.resolve(__dirname, "src/aurelia-plugin-skeleton-ts-webpack.ts")
       }
     },
     entry: {

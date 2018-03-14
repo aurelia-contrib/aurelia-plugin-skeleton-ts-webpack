@@ -1,4 +1,4 @@
-import { configure } from "../../src/index";
+import { configure } from "../../src/aurelia-plugin-skeleton-ts-webpack";
 
 describe("configure()", () => {
   it("should set fxconfig.foo to 'bar'", () => {
