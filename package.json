@@ -1,9 +1,14 @@
 {
   "name": "aurelia-skeleton-plugin-ts-webpack",
-  "version": "0.1.0",
-  "description":
-    "A skeleton project with basic configuration for developing an Aurelia plugin in TypeScript that utilizes webpack",
-  "keywords": ["aurelia", "skeleton", "plugin", "typescript", "webpack"],
+  "version": "0.1.1",
+  "description": "A skeleton project with basic configuration for developing an Aurelia plugin in TypeScript that utilizes webpack",
+  "keywords": [
+    "aurelia",
+    "skeleton",
+    "plugin",
+    "typescript",
+    "webpack"
+  ],
   "homepage": "https://github.com/fkleuver/aurelia-skeleton-plugin-ts-webpack",
   "bugs": {
     "url": "https://github.com/fkleuver/aurelia-skeleton-plugin-ts-webpack/issues"
@@ -27,7 +32,11 @@
     "release-patch": "cross-env ./node_modules/.bin/nps release.patch",
     "release-minor": "cross-env ./node_modules/.bin/nps release.minor",
     "release-major": "cross-env ./node_modules/.bin/nps release.major",
-    "ghpages": "cross-env ./node_modules/.bin/nps ghpages"
+    "release-patch-dry": "cross-env ./node_modules/.bin/nps release.patch.dry",
+    "release-minor-dry": "cross-env ./node_modules/.bin/nps release.minor.dry",
+    "release-major-dry": "cross-env ./node_modules/.bin/nps release.major.dry",
+    "ghpages": "cross-env ./node_modules/.bin/nps ghpages",
+    "ghpages-setup": "cross-env ./node_modules/.bin/nps ghpages.setup"
   },
   "dependencies": {},
   "devDependencies": {
@@ -35,7 +44,7 @@
     "@types/jasmine": "^2.8.6",
     "@types/karma": "^1.7.3",
     "@types/node": "^9.4.7",
-    "@types/webpack": "^4.1.0",
+    "@types/webpack": "^4.1.1",
     "aurelia-bootstrapper": "^2.2.0",
     "aurelia-framework": "^1.1.5",
     "aurelia-pal-browser": "^1.7.0",

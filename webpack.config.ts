@@ -6,12 +6,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import * as path from "path";
 import * as webpack from "webpack";
 
-const title = "Router Metadata Demo";
-
-export interface IConfiguration extends webpack.Configuration {
-  mode: "development" | "production";
-}
-
+const title = "Webpack TypeScript Plugin Skeleton";
 interface IEnv {
   server?: boolean;
   production?: boolean;
@@ -19,14 +14,14 @@ interface IEnv {
 
 const devBaseUrl: string = "/";
 const prodBaseUrl: string = "/aurelia-plugin-skeleton-ts-webpack/";
-const config = (env: IEnv = {}): IConfiguration => {
+export default (env: IEnv = {}): webpack.Configuration => {
   return {
     mode: "development",
     resolve: {
       extensions: [".ts", ".js"],
       modules: ["src", "demo", "node_modules"],
       alias: {
-        bluebird: path.resolve(__dirname, "node_modules/bluebird/js/browser/bluebird.core"),
+        "bluebird": path.resolve(__dirname, "node_modules/bluebird/js/browser/bluebird.core"),
         "aurelia-plugin-skeleton-ts-webpack": path.resolve(__dirname, "src/aurelia-plugin-skeleton-ts-webpack.ts")
       }
     },
@@ -96,5 +91,3 @@ const config = (env: IEnv = {}): IConfiguration => {
     ]
   };
 };
-
-export default config;

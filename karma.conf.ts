@@ -44,7 +44,7 @@ export default (config: IKarmaConfig): void => {
             loader: "ts-loader",
             exclude: /node_modules/,
             options: {
-              configFile: config.tsconfig || "tsconfig-karma.json",
+              configFile: config.tsconfig,
               transpileOnly: config.transpileOnly
             }
           }
