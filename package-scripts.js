@@ -1,4 +1,4 @@
-const { concurrent, copy, crossEnv, nps, rimraf, series } = require("nps-utils");
+const { concurrent, copy, crossEnv, rimraf, series } = require("nps-utils");
 
 function config(name) {
   return `configs/tsconfig-${name}.json`;
@@ -80,10 +80,10 @@ module.exports = {
   scripts: {
     lint: package(`tslint --project ${config("build")}`),
     test: {
-      default: "nps test.single",
+      default: package("nps test.single"),
       single: karma(true, false, "ChromeHeadless", true, true, true, config("test"), null, null),
       watch: {
-        default: "nps test.watch.dev",
+        default: package("nps test.watch.dev"),
         dev: karma(false, true, "ChromeHeadless", true, true, true, config("test"), null, null),
         debug: karma(false, true, "ChromeDebugging", true, false, null, config("test"), "debug", null)
       }
@@ -144,7 +144,7 @@ module.exports = {
         "git checkout gh-pages",
         "git merge master --no-edit",
         rimraf("*.bundle.js"),
-        nps("build.demo.production"),
+        package("nps build.demo.production"),
         "git add index.html *.bundle.js",
         'git commit -m "doc(demo): build demo"',
         "git push",
