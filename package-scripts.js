@@ -152,7 +152,7 @@ module.exports = {
       ),
       setup: series(
         "git checkout -b gh-pages",
-        "git --set-upstream origin gh-pages"
+        "git push -u origin gh-pages"
       )
     }
   }
