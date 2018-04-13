@@ -41,6 +41,8 @@
   "dependencies": {},
   "devDependencies": {
     "@types/bluebird-global": "^3.5.5",
+    "@types/extract-text-webpack-plugin": "^3.0.2",
+    "@types/html-webpack-plugin": "^2.30.3",
     "@types/jasmine": "^2.8.6",
     "@types/karma": "^1.7.3",
     "@types/node": "^9.6.4",
