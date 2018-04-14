@@ -99,23 +99,30 @@ module.exports = {
         }
       },
       dist: {
-        default: series.nps("build.dist.before", "build.dist.all"),
+        default: "nps build.dist.rollup",
         before: series.nps("lint", "build.dist.clean"),
-        all: concurrent.nps(
-          "build.dist.amd",
-          "build.dist.commonjs",
-          "build.dist.es2017",
-          "build.dist.es2015",
-          "build.dist.nativeModules",
-          "build.dist.system"
-        ),
         clean: rimraf("dist"),
-        amd: tsc("build-amd"),
-        commonjs: tsc("build-commonjs"),
-        es2017: tsc("build-es2017"),
-        es2015: tsc("build-es2015"),
-        nativeModules: tsc("build-native-modules"),
-        system: tsc("build-system")
+        rollup: {
+          default: series.nps("build.dist.before", "build.dist.rollup.all"),
+          all: `${package("rollup")} -c`
+        },
+        tsc: {
+          default: series.nps("build.dist.before", "build.dist.tsc.all"),
+          all: concurrent.nps(
+            "build.dist.tsc.amd",
+            "build.dist.tsc.commonjs",
+            "build.dist.tsc.es2017",
+            "build.dist.tsc.es2015",
+            "build.dist.tsc.nativeModules",
+            "build.dist.tsc.system"
+          ),
+          amd: tsc("build-amd"),
+          commonjs: tsc("build-commonjs"),
+          es2017: tsc("build-es2017"),
+          es2015: tsc("build-es2015"),
+          nativeModules: tsc("build-native-modules"),
+          system: tsc("build-system")
+        }
       }
     },
     release: {
