@@ -1,11 +1,14 @@
+import { readFileSync } from "fs";
 import ts from "rollup-plugin-typescript2";
 import resolve from "rollup-plugin-node-resolve";
 import commonJS from "rollup-plugin-commonjs";
 
+const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
+
 function output(config, format, opts = {}) {
   return {
-    input: "src/aurelia-plugin-skeleton-ts-webpack.ts",
-    output: { ...{ file: `dist/${config}/aurelia-plugin-skeleton-ts-webpack.js`, format }, ...opts },
+    input: `src/${pkg.name}.ts`,
+    output: { ...{ file: `dist/${config}/${pkg.name}.js`, format }, ...opts },
     plugins: [
       resolve(),
       commonJS({
@@ -29,7 +32,7 @@ function output(config, format, opts = {}) {
 }
 
 const outputs = [
-  output("amd", "amd", { amd: { id: "aurelia-plugin-skeleton-ts-webpack" } }),
+  output("amd", "amd", { amd: { id: pkg.name } }),
   output("commonjs", "cjs"),
   output("es2017", "es"),
   output("es2015", "es"),

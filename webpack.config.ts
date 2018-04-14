@@ -2,9 +2,12 @@
 // tslint:disable:import-name
 import { AureliaPlugin, ModuleDependenciesPlugin } from "aurelia-webpack-plugin";
 import ExtractTextPlugin from "extract-text-webpack-plugin";
+import { readFileSync } from "fs";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import * as path from "path";
 import * as webpack from "webpack";
+
+const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
 
 const title = "Webpack TypeScript Plugin Skeleton";
 interface IEnv {
@@ -13,17 +16,20 @@ interface IEnv {
 }
 
 const devBaseUrl: string = "/";
-const prodBaseUrl: string = "/aurelia-plugin-skeleton-ts-webpack/";
+const prodBaseUrl: string = `/${pkg.name}/`;
 export default (env: IEnv = {}): webpack.Configuration => {
+  const alias = {
+    "bluebird": path.resolve(__dirname, "node_modules/bluebird/js/browser/bluebird.core"),
+    "@src": path.resolve(__dirname, "src")
+  };
+  alias[pkg.name] = path.resolve(__dirname, `src/${pkg.name}.ts`);
+
   return {
     mode: "development",
     resolve: {
       extensions: [".ts", ".js"],
       modules: ["src", "demo", "node_modules"],
-      alias: {
-        "bluebird": path.resolve(__dirname, "node_modules/bluebird/js/browser/bluebird.core"),
-        "aurelia-plugin-skeleton-ts-webpack": path.resolve(__dirname, "src/aurelia-plugin-skeleton-ts-webpack.ts")
-      }
+      alias
     },
     entry: {
       app: ["aurelia-bootstrapper"],
