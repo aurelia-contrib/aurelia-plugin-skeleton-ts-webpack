@@ -9,9 +9,9 @@
     "typescript",
     "webpack"
   ],
-  "homepage": "https://github.com/fkleuver/aurelia-skeleton-plugin-ts-webpack",
+  "homepage": "https://github.com/aurelia-contrib/aurelia-skeleton-plugin-ts-webpack",
   "bugs": {
-    "url": "https://github.com/fkleuver/aurelia-skeleton-plugin-ts-webpack/issues"
+    "url": "https://github.com/aurelia-contrib/aurelia-skeleton-plugin-ts-webpack/issues"
   },
   "license": "MIT",
   "author": "Fred Kleuver <fred@avurad.nl>",
@@ -19,7 +19,7 @@
   "typings": "dist/commonjs/aurelia-skeleton-plugin-ts-webpack.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fkleuver/aurelia-skeleton-plugin-ts-webpack"
+    "url": "https://github.com/aurelia-contrib/aurelia-skeleton-plugin-ts-webpack"
   },
   "scripts": {
     "lint": "cross-env ./node_modules/.bin/nps lint",
