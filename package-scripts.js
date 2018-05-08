@@ -4,6 +4,10 @@ function config(name) {
   return `configs/tsconfig-${name}.json`;
 }
 
+function rollup(mod, minify) {
+  return package(`rollup --c --environment mod:${mod},${minify ? "minify" : ""}`);
+}
+
 function tsc(tsconfig) {
   return package(`tsc --project ${config(tsconfig)}`);
 }
@@ -103,25 +107,83 @@ module.exports = {
         before: series.nps("lint", "build.dist.clean"),
         clean: rimraf("dist"),
         rollup: {
-          default: series.nps("build.dist.before", "build.dist.rollup.all"),
-          all: `${package("rollup")} -c`
+          default: series.nps("build.dist.before", "build.dist.rollup.all.default"),
+          minify: series.nps("build.dist.rollup.all.minify"),
+          all: {
+            default: concurrent.nps(
+              "build.dist.rollup.amd.default",
+              "build.dist.rollup.commonjs.default",
+              "build.dist.rollup.es2015.default",
+              "build.dist.rollup.es2017.default",
+              "build.dist.rollup.esnext.default",
+              "build.dist.rollup.nativeModules.default",
+              "build.dist.rollup.system.default",
+              "build.dist.rollup.umd.default"
+            ),
+            minify: concurrent.nps(
+              "build.dist.rollup.amd.minify",
+              "build.dist.rollup.commonjs.minify",
+              "build.dist.rollup.es2015.minify",
+              "build.dist.rollup.es2017.minify",
+              "build.dist.rollup.esnext.default",
+              "build.dist.rollup.nativeModules.minify",
+              "build.dist.rollup.system.minify",
+              "build.dist.rollup.umd.minify"
+            )
+          },
+          amd: {
+            default: rollup("amd"),
+            minify: rollup("amd", true)
+          },
+          commonjs: {
+            default: rollup("commonjs"),
+            minify: rollup("commonjs", true)
+          },
+          es2015: {
+            default: rollup("es2015"),
+            minify: rollup("es2015", true)
+          },
+          es2017: {
+            default: rollup("es2017"),
+            minify: rollup("es2017", true)
+          },
+          esnext: {
+            default: rollup("esnext"),
+            minify: rollup("esnext", true)
+          },
+          nativeModules: {
+            default: rollup("native-modules"),
+            minify: rollup("native-modules", true)
+          },
+          system: {
+            default: rollup("system"),
+            minify: rollup("system", true)
+          },
+          umd: {
+            default: rollup("umd"),
+            minify: rollup("umd", true)
+          }
         },
         tsc: {
           default: series.nps("build.dist.before", "build.dist.tsc.all"),
           all: concurrent.nps(
             "build.dist.tsc.amd",
             "build.dist.tsc.commonjs",
-            "build.dist.tsc.es2017",
             "build.dist.tsc.es2015",
+            "build.dist.tsc.es2017",
+            "build.dist.tsc.esnext",
             "build.dist.tsc.nativeModules",
-            "build.dist.tsc.system"
+            "build.dist.tsc.system",
+            "build.dist.tsc.umd"
           ),
           amd: tsc("build-amd"),
           commonjs: tsc("build-commonjs"),
-          es2017: tsc("build-es2017"),
           es2015: tsc("build-es2015"),
+          es2017: tsc("build-es2017"),
+          esnext: tsc("build-esnext"),
           nativeModules: tsc("build-native-modules"),
-          system: tsc("build-system")
+          system: tsc("build-system"),
+          umd: tsc("build-umd")
         }
       }
     },
@@ -157,11 +219,7 @@ module.exports = {
         "git push",
         "git checkout master"
       ),
-      setup: series(
-        "git checkout -b gh-pages",
-        "git push -u origin gh-pages",
-        "git checkout master"
-      )
+      setup: series("git checkout -b gh-pages", "git push -u origin gh-pages", "git checkout master")
     }
   }
 };

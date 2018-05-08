@@ -1,5 +1,5 @@
 {
-  "name": "aurelia-skeleton-plugin-ts-webpack",
+  "name": "aurelia-plugin-skeleton-ts-webpack",
   "version": "0.1.2",
   "description": "A skeleton project with basic configuration for developing an Aurelia plugin in TypeScript that utilizes webpack",
   "keywords": [
@@ -80,6 +80,7 @@
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-typescript2": "^0.13.0",
+    "rollup-plugin-uglify": "^3.0.0",
     "standard-version": "^4.3.0",
     "style-loader": "^0.21.0",
     "ts-loader": "^4.3.0",
