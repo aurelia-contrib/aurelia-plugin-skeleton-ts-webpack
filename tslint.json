@@ -5,7 +5,7 @@
      * or are recommended in the Microsoft Secure Development Lifecycle (SDL)
      */
     "insecure-random": true,
-    "no-banned-terms": true,
+    "no-banned-terms": false,
     "no-cookies": true,
     "no-delete-expression": true,
     "no-disable-auto-sanitization": true,
@@ -16,13 +16,13 @@
     "no-function-constructor-with-string-args": true,
     "no-http-string": [true, "http://www.example.com/?.*", "http://www.examples.com/?.*"],
     "no-inner-html": true,
-    "no-octal-literal": true,
-    "no-reserved-keywords": true,
+    "no-octal-literal": false,
+    "no-reserved-keywords": false,
     "no-string-based-set-immediate": true,
     "no-string-based-set-interval": true,
     "no-string-based-set-timeout": true,
     "non-literal-require": true,
-    "possible-timing-attack": true,
+    "possible-timing-attack": false,
     "react-anchor-blank-noopener": true,
     "react-iframe-missing-sandbox": true,
     "react-no-dangerous-html": true,
@@ -32,19 +32,19 @@
      * common bug patterns in the code or enforce type safety.
      */
     "await-promise": true,
-    "forin": true,
+    "forin": false,
     "jquery-deferred-must-complete": true,
     "label-position": true,
     "match-default-export-name": true,
-    "mocha-avoid-only": true,
-    "mocha-no-side-effect-code": true,
-    "no-any": false, // fkleuver: we often need to use external libraries with incomplete/outdated type definitions, and casting "as any" is the only reasonable way to work around type-checking errors
+    "mocha-avoid-only": false,
+    "mocha-no-side-effect-code": false,
+    "no-any": false,
     "no-arg": true,
     "no-backbone-get-set-outside-model": true,
-    "no-bitwise": false, // fkleuver: we need bitwise and we know what we're doing..
-    "no-conditional-assignment": true,
+    "no-bitwise": false,
+    "no-conditional-assignment": false,
     "no-console": [true, "debug", "info", "log", "time", "timeEnd", "trace"],
-    "no-constant-condition": true,
+    "no-constant-condition": false,
     "no-control-regex": true,
     "no-debugger": true,
     "no-duplicate-super": true,
@@ -53,9 +53,9 @@
     "no-empty": true,
     "no-floating-promises": true,
     "no-for-in-array": true,
-    "no-implicit-dependencies": false, // fkleuver: we can't make internal dependencies explicit as far as I know
+    "no-implicit-dependencies": false,
     "no-import-side-effect": true,
-    "no-increment-decrement": false, // fkleuver: this is a well-known, well-documented shorthand which is present in (and works consistently across) multiple strongly-typed languages (C#, Java..), and in many cases improves readability of code, so let's not disallow this
+    "no-increment-decrement": false,
     "no-invalid-regexp": true,
     "no-invalid-template-strings": true,
     "no-invalid-this": true,
@@ -63,28 +63,28 @@
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-object-literal-type-assertion": true,
-    "no-parameter-reassignment": true,
+    "no-parameter-reassignment": false,
     "no-reference-import": true,
     "no-regex-spaces": true,
     "no-sparse-arrays": true,
     "no-string-literal": true,
     "no-string-throw": true,
-    "no-submodule-imports": false, // fkleuver: this will also warn on importing internal non-relative modules and that's not worth the hassle
+    "no-submodule-imports": false,
     "no-unnecessary-bind": true,
     "no-unnecessary-callback-wrapper": true,
     "no-unnecessary-initializer": true,
     "no-unnecessary-override": true,
-    "no-unsafe-any": false, // fkleuver: checking "any" arguments for null or undefined should be up to the author, as in many cases this leads to redundant checks
+    "no-unsafe-any": false,
     "no-unsafe-finally": true,
     "no-unused-expression": true,
-    "no-use-before-declare": false, // fkleuver: only useful when using the "var" keyword which we really never use anymore in TypeScript, and slow to compute, so let's turn it off
+    "no-use-before-declare": false,
     "no-with-statement": true,
     "promise-function-async": true,
     "promise-must-complete": true,
     "radix": true,
     "react-this-binding-issue": true,
     "react-unused-props-and-state": true,
-    "restrict-plus-operands": true, // the plus operand should really only be used for strings and numbers
+    "restrict-plus-operands": false, // the plus operand should really only be used for strings and numbers
     "strict-boolean-expressions": [
       true,
       "allow-null-union",
@@ -92,7 +92,7 @@
       "allow-string",
       "allow-number",
       "allow-mix"
-      ], // fkleuver: allowing these is a productivity tradeoff between time spent looking for bugs caused by unintentional uses, and time saved by writing shorter code
+    ],
     "switch-default": true,
     "switch-final-break": true,
     "triple-equals": [true, "allow-null-check"],
@@ -107,46 +107,46 @@
     "array-type": [true, "array"],
     "arrow-parens": false, // for simple functions the parens on arrow functions are not needed
     "ban-comma-operator": true, // possibly controversial
-    "binary-expression-operand-order": true,
+    "binary-expression-operand-order": false,
     "callable-types": true,
     "chai-prefer-contains-to-index-of": true,
     "chai-vague-errors": true,
-    "class-name": true,
+    "class-name": false,
     "comment-format": true,
     "completed-docs": [true, "classes"],
-    "export-name": false, // fkleuver: impractical for aurelia projects due to naming conventions for exported html resources, features, etc
+    "export-name": false,
     "function-name": true,
     "import-name": true,
-    "interface-name": true,
+    "interface-name": false,
     "jsdoc-format": true,
-    "max-classes-per-file": [true, 3], // we generally recommend making one public class per file
+    "max-classes-per-file": [false, 0], // we generally recommend making one public class per file
     "max-file-line-count": true,
-    "max-func-body-length": [true, 100, { "ignore-parameters-to-function-regex": "describe" }],
-    "max-line-length": [true, 140],
+    "max-func-body-length": false,
+    "max-line-length": false,
     "member-access": true,
     "member-ordering": [true, { "order": "fields-first" }],
-    "missing-jsdoc": false, // fkleuver: we don't want to enforce documentation on every single file (due to aurelia conventions being fairly self-explanatory), furthermore, for internal projects code ought to be written in such a way that it documents itself, whilst applying common sense to document critical and/or complex parts of the application
+    "missing-jsdoc": false,
     "mocha-unneeded-done": true,
     "new-parens": true,
     "no-construct": true,
-    "no-default-export": false, // fkleuver: common practise in many aurelia projects including the generated output from aurelia-cli (environment.ts), so we're leaving this off to prevent nagging just about every aurelia-cli project
+    "no-default-export": false,
     "no-duplicate-imports": true,
-    "no-empty-interface": true,
-    "no-for-in": true,
+    "no-empty-interface": false,
+    "no-for-in": false,
     "no-function-expression": true,
     "no-inferrable-types": false, // turn no-inferrable-types off in order to make the code consistent in its use of type decorations
-    "no-multiline-string": true, // multiline-strings often introduce unnecessary whitespace into the string literals
+    "no-multiline-string": false, // multiline-strings often introduce unnecessary whitespace into the string literals
     "no-null-keyword": false, // turn no-null-keyword off and use undefined to mean not initialized and null to mean without a value
     "no-parameter-properties": true,
     "no-redundant-jsdoc": true,
-    "no-relative-imports": false, // fkleuver: relative imports are a standard practise in the vast majority of aurelia projects and examples; I believe that the benefits of consistency between aurelia projects outweigh the benefits of consistency between typescript projects
+    "no-relative-imports": false,
     "no-require-imports": true,
     "no-return-await": true,
     "no-shadowed-variable": true,
     "no-suspicious-comment": true,
     "no-this-assignment": true,
     "no-typeof-undefined": true,
-    "no-unnecessary-class": false, // fkleuver: tslint is kind of bad at deciding when a class is "unnecessary"
+    "no-unnecessary-class": false,
     "no-unnecessary-field-initialization": true,
     "no-unnecessary-local-variable": true,
     "no-unnecessary-qualifier": true,
@@ -158,12 +158,12 @@
     "no-void-expression": true,
     "number-literal-format": true,
     "object-literal-sort-keys": false, // turn object-literal-sort-keys off and sort keys in a meaningful manner
-    "one-variable-per-declaration": true,
+    "one-variable-per-declaration": false,
     "only-arrow-functions": false, // there are many valid reasons to declare a function
-    "ordered-imports": true,
+    "ordered-imports": false,
     "prefer-array-literal": true,
     "prefer-const": true,
-    "prefer-for-of": true,
+    "prefer-for-of": false,
     "prefer-method-signature": true,
     "prefer-object-spread": true,
     "prefer-template": true,
@@ -171,17 +171,17 @@
     "typedef": [
       true,
       "call-signature",
-      //"arrow-call-signature", // fkleuver: this can lead to incredibly verbose code that could otherwise be very succinct; leave this up to the developer where it makes sense
+      //"arrow-call-signature",
       "parameter",
-      //"arrow-parameter", // fkleuver: this can lead to incredibly verbose code that could otherwise be very succinct; leave this up to the developer where it makes sense
+      //"arrow-parameter",
       "property-declaration",
-      //"variable-declaration", // fkleuver: just like with "var" in C#, a variable without a typedef must be directly initialized (the no-implicit-any rule will ensure this); requiring a typedef in those cases leads to redundancy in type keywords and, ultimately, less readable code
+      //"variable-declaration",
       "member-variable-declaration"
     ],
     "underscore-consistent-invocation": true,
     "unified-signatures": true,
     "use-default-type-parameter": true,
-    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"], // fkleuver: allowing leading underscore allows for pragmatic enforcement of compiler rule "no-unused-locals"
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
 
     /**
      * Accessibility. The following rules should be turned on to guarantee the best user
@@ -207,37 +207,45 @@
      * be consistent.
      */
     "align": [true, "parameters", "arguments", "statements"],
-    "curly": true,
+    "curly": false,
     "encoding": true,
-    "eofline": true,
+    "eofline": false,
     "import-spacing": true,
     "indent": [true, "spaces"],
     "linebreak-style": true,
-    "newline-before-return": true,
+    "newline-before-return": false,
     "no-consecutive-blank-lines": true,
     "no-empty-line-after-opening-brace": false,
     "no-irregular-whitespace": true,
-    "no-single-line-block-comment": true,
+    "no-single-line-block-comment": false,
     "no-trailing-whitespace": true,
     "no-unnecessary-semicolons": true,
-    "object-literal-key-quotes": [true, "consistent"], // fkleuver: either all or none, makes for more readable (and pleasant to look at) code
+    "object-literal-key-quotes": [true, "consistent"],
     "one-line": [true, "check-open-brace", "check-catch", "check-else", "check-whitespace"],
-    "quotemark": [true, "double"],
+    "quotemark": [true, "single"],
     "semicolon": [true, "always"],
     "space-within-parens": true,
-    "trailing-comma": [true, { "singleline": "never", "multiline": "never" }], // forcing trailing commas for multi-line
+    "trailing-comma": [false], // forcing trailing commas for multi-line
     // lists results in lists that are easier to reorder and version control diffs that are more clear.
     // Many teams like to have multiline be 'always'. There is no clear consensus on this rule but the
     // internal MS JavaScript coding standard does discourage it.
     "typedef-whitespace": false,
-    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type"],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-module",
+      "check-separator",
+      "check-type"
+    ],
 
     /**
      * Controversial/Configurable rules.
      */
     "ban": false, // only enable this if you have some code pattern that you want to ban
     "ban-types": true,
-    "cyclomatic-complexity": true,
+    "cyclomatic-complexity": false,
     "deprecation": false, // deprecated APIs are sometimes unavoidable
     "file-header": false, // enable this rule only if you are legally required to add a file header
     "import-blacklist": false, // enable and configure this as you desire
@@ -253,7 +261,7 @@
     "object-literal-shorthand": false, // object-literal-shorthand offers an abbreviation not an abstraction
     "prefer-conditional-expression": false, // unnecessarily strict
     "prefer-switch": false, // more of a style preference
-    "prefer-type-cast": false, // pick either type-cast format and use it consistently // fkleuver: as-cast seems to be the most popular flavor at the moment, and I suppose with a purely style preference thing such as this, it's best to just go mainstream
+    "prefer-type-cast": false, // pick either type-cast format and use it consistently
     "return-undefined": false, // this actually affect the readability of the code
     "space-before-function-paren": false, // turn this on if this is really your coding standard
 
@@ -261,18 +269,18 @@
      * Deprecated rules.  The following rules are deprecated for various reasons.
      */
     "missing-optional-annotation": false, // now supported by TypeScript compiler
-    //"no-duplicate-case": true, // fkleuver: deprecated and replaced with no-duplicate-switch-case
+    //"no-duplicate-case": true,
     "no-duplicate-parameter-names": false, // now supported by TypeScript compiler
     "no-empty-interfaces": false, // use tslint no-empty-interface rule instead
     "no-missing-visibility-modifiers": false, // use tslint member-access rule instead
     "no-multiple-var-decl": false, // use tslint one-variable-per-declaration rule instead
-    //"no-stateless-class": true, // fkleuver: deprecated and replaced with no-unnecessary-class
+    //"no-stateless-class": true,
     "no-switch-case-fall-through": false, // now supported by TypeScript compiler
-    //"no-var-self": true, // fkleuver: deprecated and replaced with no-this-assignment
+    //"no-var-self": true,
     "react-tsx-curly-spacing": true,
     "typeof-compare": false, // the valid-typeof rule is currently superior to this version
     "valid-typeof": true
   },
   "rulesDirectory": "node_modules/tslint-microsoft-contrib",
-	"defaultSeverity": "warning"
+  "defaultSeverity": "warning"
 }
