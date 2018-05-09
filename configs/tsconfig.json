@@ -30,7 +30,7 @@
     //"maxNodeModuleJsDepth": 0,
     "module": "es2015", //default: target === "ES3" or "ES5" ? "CommonJS" : "ES6"
     "moduleResolution": "node", //default: module === "AMD" or "System" or "ES6" ? "Classic" : "Node",
-    //"newLine": "lf", //default: (platform specific)
+    "newLine": "lf", //default: (platform specific)
     //"noEmit": false,
     //"noEmitHelpers": false,
     //"noEmitOnError": false,
