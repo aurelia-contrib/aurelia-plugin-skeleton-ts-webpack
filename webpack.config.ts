@@ -122,7 +122,7 @@ function configure(env: { server?: boolean; production?: boolean } = {}): webpac
     plugins: [
       new HtmlWebpackPlugin({
         template: "demo/index.ejs",
-        metadata: { title: pkg.name, server, baseUrl },
+        metadata: { title: pkg.name, server, baseUrl, debug: !production },
         minify: !!production && minifyOpts
       }),
       new AureliaPlugin(),

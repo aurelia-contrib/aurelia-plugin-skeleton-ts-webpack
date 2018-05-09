@@ -21,11 +21,18 @@
   <!-- imported CSS are concatenated and added automatically -->
 </head>
 
-<body aurelia-app="main">
-  <% if (htmlWebpackPlugin.options.metadata.server) { %>
-    <!-- Webpack Dev Server reload -->
-    <script src="/webpack-dev-server.js"></script>
-  <% } %>
+<body>
+  <div aurelia-app="main">
+    <% if (htmlWebpackPlugin.options.metadata.debug) { %>
+      <script>
+        window.debug = true;
+      </script>
+    <% } %>
+    <% if (htmlWebpackPlugin.options.metadata.server) { %>
+      <!-- Webpack Dev Server reload -->
+      <script src="/webpack-dev-server.js"></script>
+    <% } %>
+  </div>
 </body>
 
 </html>
