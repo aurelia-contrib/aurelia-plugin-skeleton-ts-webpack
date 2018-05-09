@@ -1,0 +1,29 @@
+version: "{build}"
+
+environment:
+  nodejs_version: "8"
+
+branches:
+  only:
+    - master
+
+matrix:
+  fast_finish: true
+
+cache:
+  - "%LOCALAPPDATA%\\Yarn"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - yarn install
+
+before_test:
+  - node --version
+  - npm --version
+  - yarn --version
+
+test_script:
+  - yarn run test
+
+build: off
+deploy: off
