@@ -1,5 +1,9 @@
 # aurelia-skeleton-plugin-ts-webpack
 
+[![Build status](https://ci.appveyor.com/api/projects/status/REPLACE_THIS/branch/master?svg=true)](https://ci.appveyor.com/project/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack/branch/master)
+[![CircleCI](https://circleci.com/gh/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack.svg?style=svg)](https://circleci.com/gh/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack)
+[![Coverage Status](https://coveralls.io/repos/github/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack/badge.svg?branch=master)](https://coveralls.io/github/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack?branch=master)
+
 A plugin skeleton that utilizes `nps` to fully automate the release process.
 
 Optimized for development in Visual Studio Code.
