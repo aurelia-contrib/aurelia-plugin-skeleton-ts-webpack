@@ -31,7 +31,7 @@ export default (config: IKarmaConfig): void => {
       mode: "development",
       resolve: {
         extensions: [".ts", ".js"],
-        modules: ["src", "node_modules"],
+        modules: [path.resolve(__dirname, "src"), path.resolve(__dirname, "node_modules")],
         alias: {
           src: path.resolve(__dirname, "src")
         }
@@ -40,9 +40,9 @@ export default (config: IKarmaConfig): void => {
       module: {
         rules: [
           {
-            test: /\.ts$/,
+            test: /\.ts$/i,
             loader: "ts-loader",
-            exclude: /node_modules/,
+            exclude: /node_modules/i,
             options: {
               configFile: config.tsconfig,
               transpileOnly: config.transpileOnly
