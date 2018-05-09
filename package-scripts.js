@@ -12,8 +12,12 @@ function tsc(tsconfig) {
   return package(`tsc --project ${config(tsconfig)}`);
 }
 
+function setTsNodeProject() {
+  return `TS_NODE_PROJECT=\"${config("tsnode")}\"`;
+}
+
 function webpack(tool, arg) {
-  return crossEnv(`TS_NODE_PROJECT=\"${config("webpack")}\" ${tool} --config webpack.config.ts ${arg}`);
+  return crossEnv(`${setTsNodeProject()} ${package(tool)} --config webpack.config.ts ${arg}`);
 }
 
 function package(script) {
@@ -22,7 +26,7 @@ function package(script) {
 
 function karma(single, watch, browsers, transpileOnly, noInfo, coverage, tsconfig, logLevel, devtool) {
   return package(
-    "karma start"
+    `${setTsNodeProject()} ${package("karma")} start`
       .concat(single !== null ? ` --single-run=${single}` : "")
       .concat(watch !== null ? ` --auto-watch=${watch}` : "")
       .concat(browsers !== null ? ` --browsers=${browsers}` : "")
@@ -68,7 +72,7 @@ function release(version, dry) {
      * Therefore, always remember to manually "unbump" the version number in package.json after doing a dry run!
      * If you forget this, you'll end up bumping the version twice which gives you one release without changes.
      */
-    version: `standard-version --first-release --commit-all${dry ? " --dry-run" : ""}`,
+    version: `${package("standard-version")} --first-release --commit-all${dry ? " --dry-run" : ""}`,
     build: series.nps("test", "build.dist"),
     git: {
       stage: "git add package.json dist",
