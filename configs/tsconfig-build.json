@@ -5,7 +5,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "stripInternal": true
+    "stripInternal": true,
+    "sourceMap": true
   },
   "include": ["../src"]
 }

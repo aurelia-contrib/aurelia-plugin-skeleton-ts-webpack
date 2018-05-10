@@ -59,7 +59,10 @@ function configure(env: { server?: boolean; production?: boolean } = {}): webpac
     resolve: {
       extensions: [".ts", ".js"],
       modules: [paths.src, paths.demo, paths.nodeModules],
-      alias: { bluebird: paths.bluebird }
+      alias: {
+        bluebird: paths.bluebird,
+        "@src": paths.src
+      }
     },
     entry: {
       app: ["aurelia-bootstrapper"],

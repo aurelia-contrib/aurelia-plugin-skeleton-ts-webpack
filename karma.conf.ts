@@ -33,10 +33,10 @@ export default (config: IKarmaConfig): void => {
         extensions: [".ts", ".js"],
         modules: [path.resolve(__dirname, "src"), path.resolve(__dirname, "node_modules")],
         alias: {
-          src: path.resolve(__dirname, "src")
+          "@src": path.resolve(__dirname, "src")
         }
       },
-      devtool: "cheap-module-eval-source-map",
+      devtool: config.devtool || "cheap-module-eval-source-map",
       module: {
         rules: [
           {
@@ -69,7 +69,7 @@ export default (config: IKarmaConfig): void => {
   if (config.coverage) {
     options.webpack.module.rules.push({
       enforce: "post",
-      exclude: /(node_modules|\.spec\.ts$)/,
+      exclude: /(node_modules|\.spec\.ts$)/i,
       loader: "istanbul-instrumenter-loader",
       options: { esModules: true },
       test: /src[\/\\].+\.ts$/
