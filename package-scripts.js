@@ -217,8 +217,9 @@ module.exports = {
         "git checkout gh-pages",
         "git merge master --no-edit",
         rimraf("*.bundle.js"),
+        rimraf("*.bundle.map"),
         package("nps build.demo.production"),
-        "git add index.html *.bundle.js",
+        "git add index.html *.bundle.js *.bundle.map",
         'git commit -m "doc(demo): build demo"',
         "git push",
         "git checkout master"
