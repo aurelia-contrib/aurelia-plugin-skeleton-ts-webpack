@@ -27,6 +27,7 @@
     "test-watch": "cross-env ./node_modules/.bin/nps test.watch",
     "test-debug": "cross-env ./node_modules/.bin/nps test.watch.debug",
     "build": "cross-env ./node_modules/.bin/nps build.dist",
+    "minify": "cross-env ./node_modules/.bin/nps build.dist.rollup.minify",
     "demo-dev": "cross-env ./node_modules/.bin/nps build.demo",
     "demo-prod": "cross-env ./node_modules/.bin/nps build.demo.production",
     "release-patch": "cross-env ./node_modules/.bin/nps release.patch",
