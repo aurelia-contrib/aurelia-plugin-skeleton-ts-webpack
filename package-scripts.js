@@ -1,32 +1,19 @@
-const { concurrent, copy, crossEnv, rimraf, series } = require('nps-utils');
-
-function config(name) {
-  return `configs/tsconfig-${name}.json`;
-}
+const { concurrent, series } = require('nps-utils');
 
 function rollup(mod, minify) {
-  return package(`rollup --c --environment mod:${mod},${minify ? 'minify' : ''}`);
+  return `rollup --c --environment mod:${mod},${minify ? 'minify' : ''}`;
 }
 
 function tsc(tsconfig) {
-  return package(`tsc --project ${config(tsconfig)}`);
-}
-
-function setTsNodeProject() {
-  return `TS_NODE_PROJECT=\'${config('tsnode')}\'`;
+  return `tsc --project configs/tsconfig-${tsconfig}.json}`;
 }
 
 function webpack(tool, arg) {
-  return crossEnv(`${setTsNodeProject()} ${package(tool)} --config webpack.config.ts ${arg}`);
-}
-
-function package(script) {
-  return crossEnv(`./node_modules/.bin/${script}`);
+  return `cross-env TS_NODE_PROJECT=\'configs/tsconfig-tsnode.json\' ${tool} --config webpack.config.ts ${arg}`;
 }
 
 function karma(single, watch, browsers, transpileOnly, noInfo, coverage, tsconfig, logLevel, devtool) {
-  return package(
-    `${setTsNodeProject()} ${package('karma')} start`
+  return 'cross-env TS_NODE_PROJECT=\'configs/tsconfig-tsnode.json\' karma start'
       .concat(single !== null ? ` --single-run=${single}` : '')
       .concat(watch !== null ? ` --auto-watch=${watch}` : '')
       .concat(browsers !== null ? ` --browsers=${browsers}` : '')
@@ -35,8 +22,7 @@ function karma(single, watch, browsers, transpileOnly, noInfo, coverage, tsconfi
       .concat(coverage !== null ? ` --coverage=${coverage}` : '')
       .concat(tsconfig !== null ? ` --tsconfig=${tsconfig}` : '')
       .concat(logLevel !== null ? ` --log-level=${logLevel}` : '')
-      .concat(devtool !== null ? ` --devtool=${devtool}` : '')
-  );
+      .concat(devtool !== null ? ` --devtool=${devtool}` : '');
 }
 
 function release(version, dry) {
@@ -58,7 +44,7 @@ function release(version, dry) {
       `release.${version}.${variant}.git.stage`
     ),
     after: series.nps(`release.${version}.${variant}.git.push`, `release.${version}.${variant}.npm.publish`),
-    bump: crossEnv(`npm --no-git-tag-version version ${version}`),
+    bump: `npm --no-git-tag-version version ${version}`,
     /**
      * Normally, standard-version looks for certain keywords in the commit log and automatically assigns
      * major/minor/patch based on the contents of those logs.
@@ -72,7 +58,7 @@ function release(version, dry) {
      * Therefore, always remember to manually 'unbump' the version number in package.json after doing a dry run!
      * If you forget this, you'll end up bumping the version twice which gives you one release without changes.
      */
-    version: `${package('standard-version')} --first-release --commit-all${dry ? ' --dry-run' : ''}`,
+    version: `standard-version --first-release --commit-all${dry ? ' --dry-run' : ''}`,
     build: series.nps('test', 'build.dist'),
     git: {
       stage: 'git add package.json dist',
@@ -86,14 +72,14 @@ function release(version, dry) {
 
 module.exports = {
   scripts: {
-    lint: package(`tslint --project ${config('build')}`),
+    lint: `tslint --project configs/tsconfig-build.json`,
     test: {
-      default: package('nps test.single'),
-      single: karma(true, false, 'ChromeHeadless', true, true, true, config('test'), null, null),
+      default: 'nps test.single',
+      single: karma(true, false, 'ChromeHeadless', true, true, true, 'configs/tsconfig-test.json', null, null),
       watch: {
-        default: package('nps test.watch.dev'),
-        dev: karma(false, true, 'ChromeHeadless', true, true, true, config('test'), null, null),
-        debug: karma(false, true, 'ChromeDebugging', true, false, null, config('test'), 'debug', null)
+        default: 'nps test.watch.dev',
+        dev: karma(false, true, 'ChromeHeadless', true, true, true, 'configs/tsconfig-test.json', null, null),
+        debug: karma(false, true, 'ChromeDebugging', true, false, null, 'configs/tsconfig-test.json', 'debug', null)
       }
     },
     build: {
@@ -109,7 +95,7 @@ module.exports = {
       dist: {
         default: 'nps build.dist.rollup',
         before: series.nps('lint', 'build.dist.clean'),
-        clean: rimraf('dist'),
+        clean: 'rimraf dist',
         rollup: {
           default: series.nps('build.dist.before', 'build.dist.rollup.all.default'),
           minify: series.nps('build.dist.rollup.all.minify'),
@@ -216,9 +202,9 @@ module.exports = {
       default: series(
         'git checkout gh-pages',
         'git merge master --no-edit',
-        rimraf('*.bundle.js'),
-        rimraf('*.bundle.map'),
-        package('nps build.demo.production'),
+        'rimraf *.bundle.js',
+        'rimraf *.bundle.map',
+        'nps build.demo.production',
         'git add index.html *.bundle.js *.bundle.map',
         'git commit -m "doc(demo): build demo"',
         'git push',
