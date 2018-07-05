@@ -36,7 +36,7 @@ export default (config: IKarmaConfig): void => {
           '@src': path.resolve(__dirname, 'src')
         }
       },
-      devtool: config.devtool || 'cheap-module-eval-source-map',
+      devtool: (<any>config).devtool || 'cheap-module-eval-source-map',
       module: {
         rules: [
           {
