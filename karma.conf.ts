@@ -1,6 +1,6 @@
-import * as karma from "karma";
-import * as path from "path";
-import * as webpack from "webpack";
+import * as karma from 'karma';
+import * as path from 'path';
+import * as webpack from 'webpack';
 
 export interface IKarmaConfig extends karma.Config, IKarmaConfigOptions {
   transpileOnly?: boolean;
@@ -21,27 +21,27 @@ export default (config: IKarmaConfig): void => {
   const rules: webpack.Rule[] = [];
 
   const options: IKarmaConfigOptions = {
-    basePath: config.basePath || "./",
-    frameworks: ["jasmine"],
-    files: ["test/setup.ts"],
+    basePath: config.basePath || './',
+    frameworks: ['jasmine'],
+    files: ['test/setup.ts'],
     preprocessors: {
-      "test/setup.ts": ["webpack", "sourcemap"]
+      'test/setup.ts': ['webpack', 'sourcemap']
     },
     webpack: {
-      mode: "development",
+      mode: 'development',
       resolve: {
-        extensions: [".ts", ".js"],
-        modules: [path.resolve(__dirname, "src"), path.resolve(__dirname, "node_modules")],
+        extensions: ['.ts', '.js'],
+        modules: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')],
         alias: {
-          "@src": path.resolve(__dirname, "src")
+          '@src': path.resolve(__dirname, 'src')
         }
       },
-      devtool: config.devtool || "cheap-module-eval-source-map",
+      devtool: config.devtool || 'cheap-module-eval-source-map',
       module: {
         rules: [
           {
             test: /\.ts$/i,
-            loader: "ts-loader",
+            loader: 'ts-loader',
             exclude: /node_modules/i,
             options: {
               configFile: config.tsconfig,
@@ -52,15 +52,15 @@ export default (config: IKarmaConfig): void => {
       }
     },
     mime: {
-      "text/x-typescript": ["ts"]
+      'text/x-typescript': ['ts']
     },
-    reporters: ["mocha", "progress"],
+    reporters: ['mocha', 'progress'],
     webpackServer: { noInfo: config.noInfo },
-    browsers: config.browsers || ["Chrome"],
+    browsers: config.browsers || ['Chrome'],
     customLaunchers: {
       ChromeDebugging: {
-        base: "Chrome",
-        flags: ["--remote-debugging-port=9333"],
+        base: 'Chrome',
+        flags: ['--remote-debugging-port=9333'],
         debug: true
       }
     }
@@ -68,15 +68,15 @@ export default (config: IKarmaConfig): void => {
 
   if (config.coverage) {
     options.webpack.module.rules.push({
-      enforce: "post",
+      enforce: 'post',
       exclude: /(node_modules|\.spec\.ts$)/i,
-      loader: "istanbul-instrumenter-loader",
+      loader: 'istanbul-instrumenter-loader',
       options: { esModules: true },
       test: /src[\/\\].+\.ts$/
     });
-    options.reporters.push("coverage-istanbul");
+    options.reporters.push('coverage-istanbul');
     options.coverageIstanbulReporter = {
-      reports: ["html", "lcovonly", "text-summary"],
+      reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
     };
   }
